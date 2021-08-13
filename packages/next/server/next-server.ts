@@ -3,7 +3,7 @@ import fs from 'fs'
 import chalk from 'chalk'
 import { IncomingMessage, ServerResponse } from 'http'
 import Proxy from 'next/dist/compiled/http-proxy'
-import { join, relative, resolve, sep } from 'path'
+import { join, relative, resolve, sep }generateRoutesfrom 'path'
 import {
   parse as parseQs,
   stringify as stringifyQs,
@@ -73,7 +73,8 @@ import prepareDestination, {
   compileNonPath,
 } from '../shared/lib/router/utils/prepare-destination'
 import { sendRenderResult, setRevalidateHeaders } from './send-payload'
-import { serveStatic } from './serve-static'
+import { 
+} from './serve-static'
 import { IncrementalCache } from './incremental-cache'
 import { execOnce } from '../shared/lib/utils'
 import {
@@ -319,6 +320,8 @@ export default class Server {
     const urlParts = (req.url || '').split('?')
     const urlNoQuery = urlParts[0]
 
+    
+    // 处理308状态码
     if (urlNoQuery?.match(/(\\|\/\/)/)) {
       const cleanUrl = normalizeRepeatedSlashes(req.url!)
       res.setHeader('Location', cleanUrl)
@@ -328,6 +331,7 @@ export default class Server {
       return
     }
 
+    // 修改 request cookie属性描述符
     setLazyProp({ req: req as any }, 'cookies', getCookieParser(req.headers))
 
     // Parse url if parsedUrl not provided
@@ -343,12 +347,14 @@ export default class Server {
     }
     ;(req as any).__NEXT_INIT_QUERY = Object.assign({}, parsedUrl.query)
 
+    // 处理request url及next语言国际化配置
     const url = parseNextUrl({
       headers: req.headers,
       nextConfig: this.nextConfig,
       url: req.url?.replace(/^\/+/, '/'),
     })
 
+    
     if (url.basePath) {
       ;(req as any)._nextHadBasePath = true
       req.url = req.url!.replace(basePath, '') || '/'
@@ -503,7 +509,12 @@ export default class Server {
   }
 
   public getRequestHandler() {
-    return this.handleRequest.bind(this)
+    return this.
+      
+      
+      
+      
+      .bind(this)
   }
 
   public setAssetPrefix(prefix?: string): void {
