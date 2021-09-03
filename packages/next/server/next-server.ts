@@ -3,7 +3,7 @@ import fs from 'fs'
 import chalk from 'chalk'
 import { IncomingMessage, ServerResponse } from 'http'
 import Proxy from 'next/dist/compiled/http-proxy'
-import { join, relative, resolve, sep }generateRoutesfrom 'path'
+import { join, relative, resolve, sep } from 'path'
 import {
   parse as parseQs,
   stringify as stringifyQs,
