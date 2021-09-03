@@ -267,6 +267,8 @@ export default class Server {
     }
 
     this.customRoutes = this.getCustomRoutes()
+    
+    // 初始化路由
     this.router = new Router(this.generateRoutes())
     this.setAssetPrefix(assetPrefix)
 
