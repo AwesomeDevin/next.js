@@ -266,9 +266,17 @@ export default class Router {
       let currentPathname = parsedUrlUpdated.pathname as string
       const originalPathname = currentPathname
       const requireBasePath = testRoute.requireBasePath !== false
+      
+      // 我们的静态内容路由必定是非自定义你路由
       const isCustomRoute = customRouteTypes.has(testRoute.type)
+      
+      // 一定返回否
       const isPublicFolderCatchall = testRoute.name === 'public folder catchall'
+      
+      // 一定为''
       const keepBasePath = isCustomRoute || isPublicFolderCatchall
+      
+      // 一定为否
       const keepLocale = isCustomRoute
 
       const currentPathnameNoBasePath = replaceBasePath(
@@ -280,6 +288,7 @@ export default class Router {
         currentPathname = currentPathnameNoBasePath
       }
 
+      // 国际化不处理
       const localePathResult = normalizeLocalePath(
         currentPathnameNoBasePath,
         this.locales
